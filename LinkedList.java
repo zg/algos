@@ -44,6 +44,11 @@ public class LinkedList<T> {
         }
     }
 
+    void addAll(LinkedList<T> from) {
+        for(int i = 0; i < from.size(); i++)
+            add(from.get(i));
+    }
+
     private class node {
         node prev;
         node next;
