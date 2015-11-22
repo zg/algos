@@ -1,6 +1,5 @@
 /**
- * This is a very naive implementation of quicksort. For a much faster
- * implementation, refer to java.util.DualPivotQuicksort.
+ * A basic implementation of the quicksort algorithm for integers.
  *
  * This will check the weight attribute on each element for comparison
  * in the sorting. An example class edge is used (such as in a graph).

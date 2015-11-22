@@ -1,6 +1,7 @@
 /**
- * This is a very naive implementation of quicksort. For a much faster
- * implementation, refer to java.util.DualPivotQuicksort.
+ * A basic implementation of the quicksort algorithm for integers.
+ *
+ * @author Zack Zatkin-Gold
  */
 public class Quicksort {
     private int[] a;
