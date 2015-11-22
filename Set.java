@@ -28,6 +28,6 @@ public class Set {
 
     void addAll(Set from) {
         for(int i = 0; i <= from.idx; i++)
-            items[++idx] = from.get(i);
+            add(from.get(i));
     }
 }
