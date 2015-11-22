@@ -4,44 +4,28 @@
  * @author Zack Zatkin-Gold
  */
 public class LinkedList<T> {
-    private int len;
-    private node pre;
-    private node post;
-
-    LinkedList() {
-        pre = new node();
-        post = new node();
-        pre.next = post;
-        post.prev = pre;
+    private class node {
+        node prev;
+        node next;
+        T item;
     }
 
-    int size() {
-        return len;
+    private int len = 0;
+    private node first;
+    private node last;
+
+    LinkedList() {
     }
 
     void add(T item) {
-        node last = post.prev;
+        node end = last.prev;
         node x = new node();
-        x.val = item;
-        x.next = post;
+        x.item = item;
+        x.next = last;
         x.prev = last;
-        post.prev = x;
-        last.next = x;
+        end.prev = x;
+        end.next = x;
         len++;
-    }
-
-    T get(int idx) {
-        if(idx < (len >> 1)) {
-            node x = pre.next;
-            for(int i = 0; i < idx; i++)
-                x = x.next;
-            return x.val;
-        } else {
-            node x = post.prev;
-            for(int i = len - 1; i > idx; i--)
-                x = x.prev;
-            return x.val;
-        }
     }
 
     void addAll(LinkedList<T> from) {
@@ -49,9 +33,90 @@ public class LinkedList<T> {
             add(from.get(i));
     }
 
-    private class node {
-        node prev;
-        node next;
-        T val;
+    void clear() {
+        for(node x = first; x != null; ) {
+            node next = x.next;
+            x.item = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        first = new node();
+        last = new node();
+        first.next = last;
+        last.prev = first;
+        len = 0;
+    }
+
+    boolean contains(T item) {
+        for(int idx = 0; idx < len; idx++)
+            if(get(idx) == item)
+                return true;
+        return false;
+    }
+
+    T get(int idx) {
+        if(idx < (len >> 1)) {
+            node x = first.next;
+            for(int i = 0; i < idx; i++)
+                x = x.next;
+            return x.item;
+        } else {
+            node x = last.prev;
+            for(int i = len - 1; i > idx; i--)
+                x = x.prev;
+            return x.item;
+        }
+    }
+
+    T getFirst() {
+        return len > 0 ? first.next.item : null;
+    }
+
+    T getLast() {
+        return len > 0 ? last.prev.item : null;
+    }
+
+    int indexOf(T item) {
+        int idx = 0;
+        for(node x = first.next; x != null; x = x.next) {
+            if(item.equals(x.item))
+                return idx;
+            idx++;
+        }
+        return -1;
+    }
+
+    int lastIndexOf(T item) {
+        int idx = 0;
+        for(node x = last.prev; x != null; x = x.prev) {
+            if(item.equals(x.item))
+                return idx;
+            idx++;
+        }
+        return -1;
+    }
+
+    int size() {
+        return len;
+    }
+
+    T set(int idx, T item) {
+        if(idx < 0 || idx >= len) return null;
+        if(idx < (len >> 1)) {
+            node x = first.next;
+            for(int i = 0; i < idx; i++)
+                x = x.next;
+            T old_item = x.item;
+            x.item = item;
+            return old_item;
+        } else {
+            node x = last.prev;
+            for(int i = len - 1; i > idx; i--)
+                x = x.prev;
+            T old_item = x.item;
+            x.item = item;
+            return old_item;
+        }
     }
 }
