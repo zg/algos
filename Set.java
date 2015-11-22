@@ -15,10 +15,6 @@ public class Set {
         this.items = new int[length];
     }
 
-    int get(int idx) {
-        return items[idx];
-    }
-
     void add(int item) {
         for(int i = 0; i <= idx; i++)
             if(items[i] == item)
@@ -29,5 +25,29 @@ public class Set {
     void addAll(Set from) {
         for(int i = 0; i <= from.idx; i++)
             add(from.get(i));
+    }
+
+    void clear() {
+        items = new int[length];
+    }
+
+    boolean contains(T item) {
+        for(int i = 0; i < length; i++)
+            if(get(i) == item)
+                return true;
+        return false;
+    }
+
+    int get(int idx) {
+        return items[idx];
+    }
+
+    boolean remove(int item) {
+        for(int i = 0; i < length; i++)
+            if(get(i) == item) {
+                items[i] = 0;
+                return true;
+            }
+        return false;
     }
 }
