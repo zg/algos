@@ -1,3 +1,8 @@
+/**
+ * A basic tree traversal implementation of a binary tree.
+ *
+ * @author Zack Zatkin-Gold
+ */
 import java.util.LinkedList;
 import java.util.Queue;
 
