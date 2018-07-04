@@ -30,9 +30,22 @@ public class TreeTraversal {
         }
     }
 
+    public void levelTraversal(Node node) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()) {
+            Node next = queue.remove();
+            visit(next);
+            if(next.left != null)
+                queue.add(next.left);
+            if(next.right != null)
+                queue.add(next.right);
+        }
+    }
+
     public TreeTraversal() {
         Tree tree = new Tree();
-        for(int i = 0; i < 10; i += 1) {
+        for(int i = 0; i < Math.pow(2, 4) - 1; i += 1) {
             Node node = new Node();
             node.val = i;
             tree.insert(node);
@@ -43,6 +56,8 @@ public class TreeTraversal {
         inOrderTraversal(tree.root);
         System.out.println();
         postOrderTraversal(tree.root);
+        System.out.println();
+        levelTraversal(tree.root);
         System.out.println();
     }
 
