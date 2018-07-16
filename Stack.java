@@ -26,7 +26,7 @@ public class Stack<T> {
         return stack.get(stack.size() - 1);
     }
 
-    public boolean empty() {
+    public boolean isEmpty() {
         return stack.size() == 0;
     }
 
